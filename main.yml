@@ -1,0 +1,9 @@
+---
+- name: "customizing ubuntu"
+  hosts: localhost
+  connection: local
+  roles:
+    - role: "roles/tmux"
+    - role: "roles/terminal"
+    - role: "roles/install-tools"
+
