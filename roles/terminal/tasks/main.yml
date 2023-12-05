@@ -18,15 +18,15 @@
 
 - name: "Adding our Profile"
   set_fact:
-    new_profile_list: "{{ profile_list.value | regex_replace (']$', \", 'mateTerminal']\") }}"
+    new_profile_list: "{{ profile_list.value | regex_replace (']$', \", 'mulixTerminal']\") }}"
 
 - name: "Writing updated profile_list"
   dconf:
     key: "/org/mate/terminal/global/profile-list"
     value: "{{ new_profile_list }}"
-  when: "'mateTerminal' not in profile_list.value"
+  when: "'mulixTerminal' not in profile_list.value"
 
-- name: "Restoring mateTerminal Profile from Dump"
+- name: "Restoring mulixTerminal Profile from Dump"
   shell:
-    cmd: "dconf load /org/mate/terminal/profiles/mateTerminal/ < {{ role_path }}/files/dconf-dump-video"
+    cmd: "dconf load /org/mate/terminal/profiles/mateTerminal/ < {{ role_path }}/files/mulixTerminal"
   when: "'mateTerminal' not in profile_list.value"
