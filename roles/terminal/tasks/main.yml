@@ -28,5 +28,5 @@
 
 - name: "Restoring mulixTerminal Profile from Dump"
   shell:
-    cmd: "dconf load /org/mate/terminal/profiles/mateTerminal/ < {{ role_path }}/files/mulixTerminal"
-  when: "'mateTerminal' not in profile_list.value"
+    cmd: "dconf load /org/mate/terminal/profiles/mulixTerminal/ < {{ role_path }}/files/mulixTerminal"
+  when: "'mulixTerminal' not in profile_list.value"
