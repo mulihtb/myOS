@@ -3,30 +3,3 @@
   copy: 
     src: "{{ role_path }}/files/.bashrc"
     dest: "{{ ansible_env.HOME }}"
-
-- name: " Read current Mate terminal profiles"
-  dconf:
-    key: "/org/mate/terminal/global/profile-list"
-    state: "read"
-  register: "profile_list" 
-
-- name: "profile_list was not set, settings"
-  set_fact:
-    profile_list:
-      value: '["default"]'
-      when: profile_list.value is none
-
-- name: "Adding our Profile"
-  set_fact:
-    new_profile_list: "{{ profile_list.value | regex_replace (']$', \", 'mulix']\") }}"
-
-- name: "Writing updated profile_list"
-  dconf:
-    key: "/org/mate/terminal/global/profile-list"
-    value: "{{ new_profile_list }}"
-  when: "'mulix' not in profile_list.value"
-
-- name: "Restoring mulix Profile from Dump"
-  shell:
-    cmd: "dconf load /org/mate/terminal/profiles/mulix/ < {{ role_path }}/files/mulix"
-  when: "'mulix' not in profile_list.value"
